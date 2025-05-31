@@ -8,6 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+// import { noSpaceAllowed } from './validators/noSpaceAllowed.validator';
+import { customValidators } from './validators/noSpaceAllowed.validator';
 @Component({
   selector: 'app-root',
   imports: [ReactiveFormsModule, CommonModule],
@@ -19,10 +21,20 @@ export class AppComponent implements OnInit {
   reactiveForm: FormGroup;
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
+      firstName: new FormControl(null, [
+        Validators.required,
+        customValidators.noSpaceAllowed,
+      ]),
+      lastName: new FormControl(null, [
+        Validators.required,
+        customValidators.noSpaceAllowed,
+      ]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      userName: new FormControl(null),
+      userName: new FormControl(
+        null,
+        Validators.required,
+        customValidators.checkUserName
+      ),
       dob: new FormControl(null),
       gender: new FormControl('male'),
       address: new FormGroup({
