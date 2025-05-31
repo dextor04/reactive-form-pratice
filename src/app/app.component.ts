@@ -59,6 +59,8 @@ export class AppComponent implements OnInit {
   }
   OnformSubmitted() {
     console.log(this.reactiveForm);
+    //
+    console.log('form submitted');
   }
   addSkills() {
     (<FormArray>this.reactiveForm.get('skills')).push(
